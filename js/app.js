@@ -142,7 +142,23 @@ class controladorVehículos {
                 controladorVG.agregarVG(vehiculos)
                 controladorVG.guardarVStorage()
                 controladorVG.mostrarVehiculosG()
-                
+
+                // =======toastify=======
+                Toastify({
+                    text: "Vehículo guardado con éxito",
+                    duration: 3000,
+                    destination: "https://github.com/apvarun/toastify-js",
+                    newWindow: true,
+                    close: true,
+                    gravity: "bottom", // `top` or `bottom`
+                    position: "right", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right,rgba(4, 97, 236, 0.123))",
+                    },
+                    onClick: function () { } // Callback after click
+                }).showToast();
+
             })
         })
     }
@@ -155,26 +171,36 @@ class vehiculosGuardados {
     }
 
     agregarVG(vehiculoNuevo) {
-        if(vehiculoNuevo instanceof vehiculos){
-        let fueGuardado = this.arregloVG.some(vehiculos => vehiculos.idModal == vehiculoNuevo.idModal)
-        if (!fueGuardado) {
-            this.arregloVG.push(vehiculoNuevo)
+        if (vehiculoNuevo instanceof vehiculos) {
+            let fueGuardado = this.arregloVG.some(vehiculos => vehiculos.idModal == vehiculoNuevo.idModal)
+            if (!fueGuardado) {
+                this.arregloVG.push(vehiculoNuevo)
+            }
         }
     }
-    }
 
-    eliminarVG(vehiculoE){
+    eliminarVG(vehiculoE) {
         let indiceVG = this.arregloVG.findIndex(vehiculoNuevo => vehiculoNuevo.idModal == vehiculoE.idModal)
-        this.arregloVG.splice(indiceVG,1)
+        this.arregloVG.splice(indiceVG, 1)
     }
 
-    agregarEVG(){
+    agregarEVG() {
         this.arregloVG.forEach(vehiculos => {
             const btnE = document.getElementById(`evg${vehiculos.idModal}`)
-            btnE.addEventListener("click", ()=> {
+            btnE.addEventListener("click", () => {
                 this.eliminarVG(vehiculos)
                 this.guardarVStorage()
                 this.mostrarVehiculosG()
+                // ====alerta sweetalert2=====
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Vehículo eliminado con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+
             })
         })
     }
@@ -191,11 +217,11 @@ class vehiculosGuardados {
         let arregloStorageVG = []
         listaArregloVG.forEach(vehiculo => {
 
-            let nuevoV = new vehiculos (vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
+            let nuevoV = new vehiculos(vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
             arregloStorageVG.push(nuevoV)
         });
         this.arregloVG = arregloStorageVG
-        
+
     }
 
     mostrarVehiculosG() {
