@@ -77,6 +77,7 @@ class vehiculos {
                     <p class="card-text">precio$ ${this.precio}</p>
                     <p class="card-text">modelo: ${this.modelo}</p>
                     <p class="card-text">${this.referencia}</p>
+                    <button class="btn btn-danger" id="evg${this.idModal}">Eliminar</button>
                 </div>
             </div>
         </div>
@@ -162,6 +163,22 @@ class vehiculosGuardados {
     }
     }
 
+    eliminarVG(vehiculoE){
+        let indiceVG = this.arregloVG.findIndex(vehiculoNuevo => vehiculoNuevo.idModal == vehiculoE.idModal)
+        this.arregloVG.splice(indiceVG,1)
+    }
+
+    agregarEVG(){
+        this.arregloVG.forEach(vehiculos => {
+            const btnE = document.getElementById(`evg${vehiculos.idModal}`)
+            btnE.addEventListener("click", ()=> {
+                this.eliminarVG(vehiculos)
+                this.guardarVStorage()
+                this.mostrarVehiculosG()
+            })
+        })
+    }
+
     guardarVStorage() {
         let arregloVGJson = JSON.stringify(this.arregloVG)
         localStorage.setItem("arregloVG", arregloVGJson)
@@ -187,6 +204,8 @@ class vehiculosGuardados {
         this.arregloVG.forEach(vehiculos => {
             contenedorVG.innerHTML += vehiculos.cardVG()
         })
+        this.agregarEVG()
+
     }
 
 }
