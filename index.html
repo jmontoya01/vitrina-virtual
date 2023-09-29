@@ -7,21 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="La mejor vitrina virtual de la ciudad de Medellin con amplia gama de carros, taxis, camiones y motocicletas">
+    <!-- =================CDN Font-awesome CSS================================ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- =================CDN bootstrap CSS================================ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
     <link rel="stylesheet" href="./style/style.css">
 </head>
-<title>Vitrina virtual de vehiculos particulares, taxis, camiones y motocicletas</title>
+<title>Vitrina virtual de vehiculos</title>
 
 
 <body>
     <header>
 
         <nav class="navbar navbar-expand-lg bg-nav border-bottom border-primary ">
-            <div class="container-fluid">
+            <div class="container-fluid gap-3">
                 <a class="navbar-brand" href="../index.html"><img src="./img/logo-vitrina.png"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -31,13 +35,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link"><a href="./index.html">Vitrina virtual</a></a>
+                            <a class="nav-link"><a href="./index.html">Originales</a></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"><a href="./salvamentos.html">Salvamentos</a></a>
                         </li>
+                        <li class="nav-item">
+                        </li>
                     </ul>
                 </div>
+                <!-- Boton iniciar modal vehiculos guardados -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-car-side"></i>
+                </button>
+                <!-- Boton iniciar modal descargo de responsavilidad -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="fa-solid fa-circle-question"></i>
+                </button>
+
             </div>
         </nav>
 
@@ -48,14 +64,7 @@
 
         <h1>Vitrina virtual</h1>
         <section class="menuvitrina">
-            <nav>
-                <ul class="menuvitrina__menu">
-                    <li><a id="btn-particulares" href="">Particulares</a></li>
-                    <li><a id="btn-camiones" href="">Camiones</a></li>
-                    <li><a id="btn-motocicletas" href="">Motocicletas</a></li>
-                    <li><a id="btn-taxis" href="">Taxis</a></li>
-                </ul>
-            </nav>
+
             <form action="" class="menuvitrina__buscar">
                 <input id="id-buscar" type="text" placeholder="Buscar..." required>
                 <div class="menuvitrina__buscar__btn">
@@ -64,68 +73,95 @@
             </form>
         </section>
 
-            <section id="id-particulares">
+        <section id="id-particulares">
 
 
-            </section>
-
-            <section id="id-camiones">
-
-                
-            </section>
-
-            <section id="id-motocicletas">
-
-            
-            </section>
-
-            <section id="id-taxis">
-
-
-        </div>
-
-        <!-- ============================Modal tarjetas============================== -->
-
-        <div id="miModal" class="modalIndex">
-            <div class="modalContenido">
-                <span class="cerrar" id="cerrarModal">&times;</span>
-                <div class="vehiculos__presentacion">
-                    <div class="vehiculos__presentacion__imgrande">
-                    <img src="" alt=""
-                    loading="lazy">
-                    </div>
-                    <div class="vehiculos__presentacion__imguno">
-                        <img src="" alt=""
-                                loading="lazy">
-                    </div>
-                    <div class="vehiculos__presentacion__imgdos">
-                        <img src="" alt=""
-                                loading="lazy">
-                    </div>
-                    <div class="vehiculos__presentacion__imgtres">
-                        <img src="" alt=""
-                                loading="lazy">
-                    </div>
-                    <div class="vehiculos__presentacion__imgcuatro">
-                        <img src="" alt=""
-                                loading="lazy">
-                    </div>
-                    <div class="vehiculos__presentacion__caracteristicas">
-                        <hr>
-                        <h2></h2>
-                        <hr>
-                        <h3>Modelo: </h3>
-                        <hr>
-                        <h3>Motor: </h3>
-                        <hr>
-                        <p></p>
-                    </div>
-                </div>
-                </div>
-        </div>
+        </section>
 
 
     </main>
+
+    <!-- ============================Modales============================== -->
+
+    <!-- Modal vehiculos guardados  -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">Vehículos guardados</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="contenedorVG">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                    <button type="button" class="btn btn-primary">guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal descargo responsabilidad-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-4" id="staticBackdropLabel">Bienvenido a la Vitrina Virtual JM</h2>
+                </div>
+                <div class="modal-body">
+                    <p> 1. El uso de esta vitrina virtual y todos los servicios, información y contenido proporcionados
+                        en ella están sujetos a los términos y condiciones establecidos en este descargo de
+                        responsabilidad. Al acceder y utilizar esta vitrina virtual, usted acepta estos términos y
+                        condiciones en su totalidad.
+
+                    <p> 2. Información General: La información proporcionada en esta vitrina virtual se ofrece
+                        únicamente con fines informativos. Hemos hecho todos los esfuerzos razonables para garantizar la
+                        precisión y actualización de la información, pero no podemos garantizar su integridad ni su
+                        exactitud en todo momento.</p>
+
+                    <p> 3. Propiedad Intelectual: Todos los contenidos, textos, imágenes, gráficos y otros elementos de
+                        esta vitrina virtual son propiedad exclusiva de la Vitrina Virtual JM o de terceros que han
+                        autorizado su uso. No está permitida la reproducción, distribución o modificación de ningún
+                        contenido sin autorización previa por escrito.</p>
+
+                    <p> 4. Enlaces Externos: Esta vitrina virtual puede contener enlaces a sitios web de terceros. Estos
+                        enlaces se proporcionan solo como una conveniencia y no implican nuestro respaldo ni
+                        responsabilidad sobre el contenido o las prácticas de esos sitios.</p>
+
+                    <p> 5. Compras en Línea: Si esta vitrina virtual permite realizar compras en línea, toda transacción
+                        está sujeta a los términos y condiciones específicos de compra que se proporcionarán durante el
+                        proceso de compra. la Vitrina Virtual JM no se hace responsable de problemas o disputas
+                        relacionadas con estas transacciones.</p>
+
+                    <p> 6. Limitación de Responsabilidad: la Vitrina Virtual JM no se hace responsable de ningún daño
+                        directo, indirecto, especial o consecuente que pueda surgir del uso de esta vitrina virtual o de
+                        la información contenida en ella. Su uso de esta vitrina virtual es bajo su propio riesgo.</p>
+
+                    <p> 7. Cambios en los Términos: Nos reservamos el derecho de modificar estos términos y condiciones
+                        en cualquier momento sin previo aviso. Se espera que los usuarios revisen regularmente esta
+                        página para estar al tanto de los cambios.</p>
+
+                    <p> 8. Jurisdicción y Ley Aplicable: Este descargo de responsabilidad se rige por las leyes de
+                        Colombia, y cualquier disputa que surja en relación con esta vitrina virtual estará sujeta a la
+                        jurisdicción exclusiva de los tribunales del país.</p>
+
+                    <p> 9. Al acceder y utilizar esta vitrina virtual, usted reconoce haber leído y comprendido este
+                        descargo de responsabilidad y acepta estar legalmente obligado por sus términos y condiciones.
+                    </p>
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Estoy de acuerdo</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div>
@@ -152,11 +188,13 @@
             width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
     </footer>
+    <!-- =============CDN bootstrap JS==================================== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
     <script src="./js/app.js"></script>
+    <!-- <script src="./js/app1.js"></script> -->
 </body>
 
 </html>
