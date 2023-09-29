@@ -130,3 +130,44 @@ console.log(v1.buscarNombre("toyota"));  // Buscar vehiculos por nombre
         <span class="visually-hidden">Next</span>
     </button>
 </div> */}
+
+
+class vehiculosGuardados{
+    constructor(){
+        this.arregloVG = []
+    }
+
+    agregarVG(vehiculoNuevo){
+        let fueGuardado = this.arregloVG.some(vehiculos => vehiculos.idModal == vehiculoNuevo.idModal)
+        if (!fueGuardado){
+            this.arregloVG.push(vehiculoNuevo)
+        }
+        
+    }
+
+    guardarVStorage(){
+        let arregloVGJson = JSON.stringify(this.arregloVG)
+        localStorage.setItem("arregloVG", arregloVGJson)
+
+    }
+
+    mostrarStorageVG(){
+        let arregloVGJson = localStorage.getItem("arregloVG")
+        let parseoArregloVG = JSON.parse(arregloVGJson)
+        let arregloStorageVG = []
+        parseoArregloVG.forEach(vehiculos => {
+            let nuevoV = new vehiculosGuardados (vehiculos.idModal, vehiculos.idCarouser, vehiculos.img1, vehiculos.img2, vehiculos.img3, vehiculos.img4, vehiculos.img5, vehiculos.precio, vehiculos.nombre, vehiculos.modelo, vehiculos.referencia,)
+            arregloStorageVG.push(nuevoV)
+        })
+        this.arregloVG = arregloStorageVG
+    }
+
+    mostrarVehiculosG() {
+        let contenedorVG = document.getElementById("contenedorVG")
+        contenedorVG.innerHTML = ""
+        this.arregloVG.forEach(vehiculos => {
+            contenedorVG.innerHTML += vehiculos.cardVG()
+        })
+    }
+
+}

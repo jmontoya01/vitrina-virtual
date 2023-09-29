@@ -16,10 +16,10 @@ class vehiculos {
         this.nombre = nombre
         this.modelo = modelo
         this.referencia = referencia
-        
+
     }
 
-    cardCV(){
+    cardCV() {
         return `
         <article class="tarjeta">
             <div class="tarjeta__cuerpo">
@@ -64,7 +64,7 @@ class vehiculos {
         </article>`
     }
 
-    cardVG(){
+    cardVG() {
         return `
         <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
@@ -89,16 +89,16 @@ class vehiculos {
 
 
 
-class controladorVehículos{
+class controladorVehículos {
     constructor() {
         this.arregloVehiculos = []
     }
 
-    agregarV(vehiculos){
-            this.arregloVehiculos.push(vehiculos)
+    agregarV(vehiculos) {
+        this.arregloVehiculos.push(vehiculos)
     }
 
-    cargarVehiculos(){
+    cargarVehiculos() {
         // ==========Crear instancias de particulares==============
 
         const p1 = new vehiculos("modal1", "carousel1", "./img/chevrolet.jpg", "./img/chevroletatras.jpg", "./img/chevroletfrente.jpg", "./img/chevroletinterior.jpg", "./img/chevroletmotor.jpg", "158.000.000", "Chevrolet Camaro SS", "2018", "25.000 kilometros | unico dueño")
@@ -113,16 +113,16 @@ class controladorVehículos{
         const c3 = new vehiculos("modal7", "carousel7", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "145.000.000", "Chevrolet NQR", "2015", "168.000 kilometros")
         const c4 = new vehiculos("modal8", "carousel8", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "165.000.000", "Chevrolet NPR", "2017", "138.000 kilometros")
 
-    // ===========Agregar los vehículos a su arreglo controladorVehiculos================
+        // ===========Agregar los vehículos a su arreglo controladorVehiculos================
 
-    controladorV.agregarV(p1)
-    controladorV.agregarV(p2)
-    controladorV.agregarV(p3)
-    controladorV.agregarV(p4)
-    controladorV.agregarV(c1)
-    controladorV.agregarV(c2)
-    controladorV.agregarV(c3)
-    controladorV.agregarV(c4)
+        controladorV.agregarV(p1)
+        controladorV.agregarV(p2)
+        controladorV.agregarV(p3)
+        controladorV.agregarV(p4)
+        controladorV.agregarV(c1)
+        controladorV.agregarV(c2)
+        controladorV.agregarV(c3)
+        controladorV.agregarV(c4)
     }
 
     mostrarVehiculos() {
@@ -136,26 +136,48 @@ class controladorVehículos{
 
         this.arregloVehiculos.forEach(vehiculos => {
             const gv = document.getElementById(`g-${vehiculos.idModal}`)
-            
-            gv.addEventListener ("click", () => {
-            controladorVG.agregarVG(vehiculos)
-            controladorVG.mostrarVehiculosG()
+
+            gv.addEventListener("click", () => {
+                controladorVG.agregarVG(vehiculos)
+                controladorVG.guardarVStorage()
+                controladorVG.mostrarVehiculosG()
+                
             })
         })
     }
 
 }
 
-class vehiculosGuardados{
-    constructor(){
+class vehiculosGuardados {
+    constructor() {
         this.arregloVG = []
     }
 
-    agregarVG(vehiculoNuevo){
+    agregarVG(vehiculoNuevo) {
+        if(vehiculoNuevo instanceof vehiculos){
         let fueGuardado = this.arregloVG.some(vehiculos => vehiculos.idModal == vehiculoNuevo.idModal)
-        if (!fueGuardado){
+        if (!fueGuardado) {
             this.arregloVG.push(vehiculoNuevo)
         }
+    }
+    }
+
+    guardarVStorage() {
+        let arregloVGJson = JSON.stringify(this.arregloVG)
+        localStorage.setItem("arregloVG", arregloVGJson)
+
+    }
+
+    recuperarStorageVG() {
+        let arregloVGJson = localStorage.getItem("arregloVG")
+        let listaArregloVG = JSON.parse(arregloVGJson)
+        let arregloStorageVG = []
+        listaArregloVG.forEach(vehiculo => {
+
+            let nuevoV = new vehiculos (vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
+            arregloStorageVG.push(nuevoV)
+        });
+        this.arregloVG = arregloStorageVG
         
     }
 
@@ -173,12 +195,12 @@ class vehiculosGuardados{
 
 
 // =================Instancias=======================
-    const controladorV = new controladorVehículos()
+const controladorV = new controladorVehículos()
+const controladorVG = new vehiculosGuardados()
 
-    const controladorVG = new vehiculosGuardados()
-
-
-
+// =================Ilamar a los metodos=======================
+controladorVG.recuperarStorageVG()
+controladorVG.mostrarVehiculosG()
 
 controladorV.cargarVehiculos()
 controladorV.mostrarVehiculos()
