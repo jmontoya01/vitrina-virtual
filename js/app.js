@@ -97,34 +97,48 @@ class controladorVehículos {
 
     agregarV(vehiculos) {
         this.arregloVehiculos.push(vehiculos)
+        }
+        // ========consumir simularAPI==================
+        async contenedorVehiculos() {
+            let listaVJSON = await fetch("simularAPI.json")
+            let listaVJS = await listaVJSON.json()
+    
+            listaVJS.forEach(vehiculo => {
+                
+                let nuevoV = new vehiculos(vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
+                this.agregarV(nuevoV)
+            })
+    
+            this.mostrarVehiculos()
     }
 
-    cargarVehiculos() {
-        // ==========Crear instancias de particulares==============
+    // cargarVehiculos() {
+    //     // ==========Crear instancias de particulares==============
 
-        const p1 = new vehiculos("modal1", "carousel1", "./img/chevrolet.jpg", "./img/chevroletatras.jpg", "./img/chevroletfrente.jpg", "./img/chevroletinterior.jpg", "./img/chevroletmotor.jpg", "158.000.000", "Chevrolet Camaro SS", "2018", "25.000 kilometros | unico dueño")
-        const p2 = new vehiculos("modal2", "carousel2", "./img/mazda.jpg", "./img/mazdaatras.jpg", "./img/mazdafrente.jpg", "./img/mazdainterior.jpg", "./img/mazdamotor.jpg", "78.000.000", "Mazda 2", "2021", "15.000 kilometros | unico dueño")
-        const p3 = new vehiculos("modal3", "carousel3", "./img/renault.jpg", "./img/renaultatras.jpg", "./img/renaultfrente.jpg", "./img/renaultinterior.jpg", "./img/renaultmotor.jpg", "148.000.000", "Renault Koleos", "2022", "12.000 kilometros | unico dueño")
-        const p4 = new vehiculos("modal4", "carousel4", "./img/toyota.jpg", "./img/toyota2.jpg", "./img/toyota3.jpg", "./img/toyota4.jpg", "./img/toyota.jpg", "458.000.000", "Toyota LC200", "2021", "35.000 kilometros | unico dueño")
+    //     const p1 = new vehiculos("modal1", "carousel1", "./img/chevrolet.jpg", "./img/chevroletatras.jpg", "./img/chevroletfrente.jpg", "./img/chevroletinterior.jpg", "./img/chevroletmotor.jpg", "158.000.000", "Chevrolet Camaro SS", "2018", "25.000 kilometros | unico dueño")
+    //     const p2 = new vehiculos("modal2", "carousel2", "./img/mazda.jpg", "./img/mazdaatras.jpg", "./img/mazdafrente.jpg", "./img/mazdainterior.jpg", "./img/mazdamotor.jpg", "78.000.000", "Mazda 2", "2021", "15.000 kilometros | unico dueño")
+    //     const p3 = new vehiculos("modal3", "carousel3", "./img/renault.jpg", "./img/renaultatras.jpg", "./img/renaultfrente.jpg", "./img/renaultinterior.jpg", "./img/renaultmotor.jpg", "148.000.000", "Renault Koleos", "2022", "12.000 kilometros | unico dueño")
+    //     const p4 = new vehiculos("modal4", "carousel4", "./img/toyota.jpg", "./img/toyota2.jpg", "./img/toyota3.jpg", "./img/toyota4.jpg", "./img/toyota.jpg", "458.000.000", "Toyota LC200", "2021", "35.000 kilometros | unico dueño")
 
-        // ==============Crear instancias de camiones================
+    //     // ==============Crear instancias de camiones================
 
-        const c1 = new vehiculos("modal5", "carousel5", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "155.000.000", "Chevrolet NHR", "2016", "148.000 kilometros")
-        const c2 = new vehiculos("modal6", "carousel6", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "175.000.000", "Chevrolet FRR", "2018", "158.000 kilometros")
-        const c3 = new vehiculos("modal7", "carousel7", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "145.000.000", "Chevrolet NQR", "2015", "168.000 kilometros")
-        const c4 = new vehiculos("modal8", "carousel8", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "165.000.000", "Chevrolet NPR", "2017", "138.000 kilometros")
+    //     const c1 = new vehiculos("modal5", "carousel5", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "155.000.000", "Chevrolet NHR", "2016", "148.000 kilometros")
+    //     const c2 = new vehiculos("modal6", "carousel6", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "175.000.000", "Chevrolet FRR", "2018", "158.000 kilometros")
+    //     const c3 = new vehiculos("modal7", "carousel7", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "145.000.000", "Chevrolet NQR", "2015", "168.000 kilometros")
+    //     const c4 = new vehiculos("modal8", "carousel8", "./img/camiones.jpg", "./img/camionfrente.jpg", "./img/camionatras.jpg", "./img/camioninterior.jpg", "./img/camionmotor.jpg", "165.000.000", "Chevrolet NPR", "2017", "138.000 kilometros")
 
-        // ===========Agregar los vehículos a su arreglo controladorVehiculos================
+    //     // ===========Agregar los vehículos a su arreglo controladorVehiculos================
 
-        controladorV.agregarV(p1)
-        controladorV.agregarV(p2)
-        controladorV.agregarV(p3)
-        controladorV.agregarV(p4)
-        controladorV.agregarV(c1)
-        controladorV.agregarV(c2)
-        controladorV.agregarV(c3)
-        controladorV.agregarV(c4)
-    }
+    //     controladorV.agregarV(p1)
+    //     controladorV.agregarV(p2)
+    //     controladorV.agregarV(p3)
+    //     controladorV.agregarV(p4)
+    //     controladorV.agregarV(c1)
+    //     controladorV.agregarV(c2)
+    //     controladorV.agregarV(c3)
+    //     controladorV.agregarV(c4)
+    //
+
 
     mostrarVehiculos() {
 
@@ -162,8 +176,8 @@ class controladorVehículos {
             })
         })
     }
-
 }
+
 
 class vehiculosGuardados {
     constructor() {
@@ -247,5 +261,5 @@ const controladorVG = new vehiculosGuardados()
 controladorVG.recuperarStorageVG()
 controladorVG.mostrarVehiculosG()
 
-controladorV.cargarVehiculos()
+controladorV.contenedorVehiculos()
 controladorV.mostrarVehiculos()
