@@ -1,8 +1,3 @@
-
-//================Tarjetas vehículos=============
-
-
-
 class vehiculos {
     constructor(idModal, idCarouser, img1, img2, img3, img4, img5, precio, nombre, modelo, referencia,) {
         this.idModal = idModal
@@ -105,11 +100,12 @@ class controladorVehículos {
     
             listaVJS.forEach(vehiculo => {
                 
-                let nuevoV = new vehiculos(vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
-                this.agregarV(nuevoV)
+                let nuevoVe = new vehiculos(vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
+                this.agregarV(nuevoVe)
             })
     
             this.mostrarVehiculos()
+            
     }
 
     // cargarVehiculos() {
@@ -258,8 +254,9 @@ const controladorV = new controladorVehículos()
 const controladorVG = new vehiculosGuardados()
 
 // =================Ilamar a los metodos=======================
-controladorVG.recuperarStorageVG()
-controladorVG.mostrarVehiculosG()
 
 controladorV.contenedorVehiculos()
 controladorV.mostrarVehiculos()
+
+controladorVG.recuperarStorageVG()
+controladorVG.mostrarVehiculosG()
