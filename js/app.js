@@ -91,15 +91,23 @@ class vehiculos {
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">${this.nombre}</h5>
-                    <p class="card-text">precio$ ${this.precio}</p>
-                    <p class="card-text">modelo: ${this.modelo}</p>
-                    <p class="card-text">${this.referencia}</p>
+                    <hr>
+                    <h6 class="card-text">precio$ ${this.precio}</h6>
+                    <hr>
+                    <h6 class="card-text">modelo: ${this.modelo}</h6>
+                    <hr>
+                    <h6 class="card-text">${this.referencia}</h6>
+                    <hr>
                     <button class="btn btn-danger" id="evg${this.idModal}">Eliminar</button>
+                    <button id="mi-${this.idModal}" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ModalInfo">
+                    Más información
+                </button>
                 </div>
             </div>
         </div>
     </div>`
     }
+
     buscarVehiculoPorId(id) {
         return this.arregloVehiculos.find(vehiculo => vehiculo.id === id);
     }
@@ -179,18 +187,12 @@ class controladorVehículos {
                 
                 // =======toastify=======
                 Toastify({
-                    text: "Vehículo guardado con éxito",
-                    duration: 3000,
-                    destination: "https://github.com/apvarun/toastify-js",
-                    newWindow: true,
-                    close: true,
+                    text: `¡${vehiculos.nombre} añadido!`,
+                    avatar : `${vehiculos.img1}`,
+                    duration: 2000,
                     gravity: "bottom", // `top` or `bottom`
                     position: "right", // `left`, `center` or `right`
                     stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: "linear-gradient(to right,rgba(4, 97, 236, 0.123))",
-                    },
-                    onClick: function () { } // Callback after click
                 }).showToast();
 
             })
@@ -214,7 +216,7 @@ class controladorVehículos {
         botonWpp(){
             const btnWpp = document.getElementById("btnWpp")
             const numeroWpp = 573015980389
-            const urlWpp = `https://api.whatsapp.com/send?phone=${numeroWpp}&text=¿Hola,%20me%20puede%20regalar%20más%20información?`
+            const urlWpp = `https://api.whatsapp.com/send?phone=${numeroWpp}&text=¿Hola,%20me%20puede%20regalar%20más%20información%20del%20vehículo%20?`
             btnWpp.addEventListener("click", () => {
                 window.location.href = urlWpp
             })
@@ -259,8 +261,6 @@ class vehiculosGuardados {
                     showConfirmButton: false,
                     timer: 1500
                 })
-
-
             })
         })
     }
@@ -291,7 +291,18 @@ class vehiculosGuardados {
             contenedorVG.innerHTML += vehiculos.cardVG()
         })
         this.agregarEVG()
+        controladorV.mostrarInfo()
+    }
 
+    mostrarInfoVG(){
+        this.arregloVG.forEach(vehiculos => {
+            let btnInfo = document.getElementById(`mi-${vehiculos.idModal}`)
+            btnInfo.addEventListener("click", () => {
+                let infoModal = document.getElementById("modalBodyInfo")
+                infoModal.innerHTML = vehiculos.cardInfo()
+                })
+                
+            })
     }
 
 }
@@ -303,12 +314,13 @@ class vehiculosGuardados {
 const controladorV = new controladorVehículos()
 const controladorVG = new vehiculosGuardados()
 
-// =================Ilamar a los metodos=======================
+// =================Llamar a los metodos del controlador de vehiculos=======================
 
 controladorV.contenedorVehiculos()
 controladorV.mostrarVehiculos()
 
-
+// =================Llamar a los metodos de los vehiculos guardados=======================
 
 controladorVG.recuperarStorageVG()
 controladorVG.mostrarVehiculosG()
+controladorVG.mostrarInfoVG()
