@@ -16,20 +16,44 @@ class vehiculos {
 
     cardInfo() {
         return `
-                        <div><img src="${this.img1}" alt=""></div>
-                        <div><img src="${this.img2}" alt=""></div>
-                        <div><img src="${this.img3}" alt=""></div>
-                        <div><img src="${this.img4}" alt=""></div>
-                        <div><img src="${this.img5}" alt=""></div>
-                        <hr>
-                        <h2>$${this.precio}</h2>
-                        <hr>
-                        <h3>${this.nombre}</h3>
-                        <hr>
-                        <p>${this.modelo}</p>
-                        <hr>
-                        <p>${this.referencia}</p>`
-    }
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner ">
+                <div class="carousel-item active">
+                    <img src="${this.img1}" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="${this.img2}" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="${this.img3}" alt="">
+                </div>
+                <div class="carousel-item">                                                                                                 
+                    <img src="${this.img4}" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="${this.img5}" alt="">
+                </div>
+        </div>
+        <a class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+            <span class="visually-hidden">atras</span>
+        </a>
+        <a class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden ">adelante</span>
+        </a>
+        </div>
+
+            <hr>
+            <h2>$${this.precio}</h2>
+            <hr>
+            <h3>${this.nombre}</h3>
+            <hr>
+            <p>${this.modelo}</p>
+            <hr>
+            <p>${this.referencia}</p>
+            `                        
+}
 
     cardCV() {
         return `
@@ -126,7 +150,7 @@ class controladorVehículos {
     }
     // ========consumir simularAPI==================
     async contenedorVehiculos() {
-        let listaVJSON = await fetch("simularAPI.json")
+        let listaVJSON = await fetch("vehiculosAPI.json")
         let listaVJS = await listaVJSON.json()
 
         listaVJS.forEach(vehiculo => {
@@ -187,7 +211,7 @@ class controladorVehículos {
                 
                 // =======toastify=======
                 Toastify({
-                    text: `¡${vehiculos.nombre} añadido!`,
+                    text: `¡${vehiculos.nombre} añadido a vehículos guardados!`,
                     avatar : `${vehiculos.img1}`,
                     duration: 2000,
                     gravity: "bottom", // `top` or `bottom`
