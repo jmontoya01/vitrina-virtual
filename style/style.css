@@ -96,7 +96,7 @@ p {
 
 .tarjeta {
     width: 350px;
-    height: 490px;
+    height: 500px;
     background-color: #5167d72f;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
@@ -114,10 +114,11 @@ p {
 
 .vehiculos__btn {
     background-color: rgba(4, 97, 236, 0.123);
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-radius: 15px;
-    transform: scale(0.8);
+    transform: scale(0.5);
     height: 100%;
+    border-color: #080505;
 }
 
 .vehiculos__btn button:hover {

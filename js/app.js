@@ -14,6 +14,23 @@ class vehiculos {
 
     }
 
+    cardInfo() {
+        return `
+                        <div><img src="${this.img1}" alt=""></div>
+                        <div><img src="${this.img2}" alt=""></div>
+                        <div><img src="${this.img3}" alt=""></div>
+                        <div><img src="${this.img4}" alt=""></div>
+                        <div><img src="${this.img5}" alt=""></div>
+                        <hr>
+                        <h2>$${this.precio}</h2>
+                        <hr>
+                        <h3>${this.nombre}</h3>
+                        <hr>
+                        <p>${this.modelo}</p>
+                        <hr>
+                        <p>${this.referencia}</p>`
+    }
+
     cardCV() {
         return `
         <article class="tarjeta">
@@ -54,7 +71,12 @@ class vehiculos {
                 <p class="nombre">${this.nombre}</p>
                 <p class="modelo">modelo | ${this.modelo}</p>
                 <p class="referencia">${this.referencia}</p>
-                <button class="vehiculos__btn" id="g-${this.idModal}">Guardar vehículo</button>
+                <button class="vehiculos__btn" id="g-${this.idModal}">Guardar</button>
+                <!-- Button modal información -->
+                <button id="mi-${this.idModal}" type="button" class=" vehiculos__btn btn" data-bs-toggle="modal" data-bs-target="#ModalInfo">
+                    Más información
+                </button>
+                
             </div>
         </article>`
     }
@@ -92,20 +114,21 @@ class controladorVehículos {
 
     agregarV(vehiculos) {
         this.arregloVehiculos.push(vehiculos)
-        }
-        // ========consumir simularAPI==================
-        async contenedorVehiculos() {
-            let listaVJSON = await fetch("simularAPI.json")
-            let listaVJS = await listaVJSON.json()
-    
-            listaVJS.forEach(vehiculo => {
-                
-                let nuevoVe = new vehiculos(vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
-                this.agregarV(nuevoVe)
-            })
-    
-            this.mostrarVehiculos()
-            
+        
+    }
+    // ========consumir simularAPI==================
+    async contenedorVehiculos() {
+        let listaVJSON = await fetch("simularAPI.json")
+        let listaVJS = await listaVJSON.json()
+
+        listaVJS.forEach(vehiculo => {
+
+            let nuevoVe = new vehiculos(vehiculo.idModal, vehiculo.idCarouser, vehiculo.img1, vehiculo.img2, vehiculo.img3, vehiculo.img4, vehiculo.img5, vehiculo.precio, vehiculo.nombre, vehiculo.modelo, vehiculo.referencia);
+            this.agregarV(nuevoVe)
+        })
+
+        this.mostrarVehiculos()
+
     }
 
     // cargarVehiculos() {
@@ -143,6 +166,7 @@ class controladorVehículos {
         this.arregloVehiculos.forEach(vehiculos => {
 
             id_particulares.innerHTML += vehiculos.cardCV()
+            
         });
 
         this.arregloVehiculos.forEach(vehiculos => {
@@ -152,7 +176,7 @@ class controladorVehículos {
                 controladorVG.agregarVG(vehiculos)
                 controladorVG.guardarVStorage()
                 controladorVG.mostrarVehiculosG()
-
+                
                 // =======toastify=======
                 Toastify({
                     text: "Vehículo guardado con éxito",
@@ -171,8 +195,24 @@ class controladorVehículos {
 
             })
         })
+        controladorV.mostrarInfo()
     }
-}
+
+    mostrarInfo() {
+
+        this.arregloVehiculos.forEach(vehiculos => {
+            let btnInfo = document.getElementById(`mi-${vehiculos.idModal}`)
+            btnInfo.addEventListener("click", () => {
+                let infoModal = document.getElementById("modalBodyInfo")
+                infoModal.innerHTML = vehiculos.cardInfo()
+                })
+                
+            })
+        }
+    }
+
+
+
 
 
 class vehiculosGuardados {
@@ -257,6 +297,8 @@ const controladorVG = new vehiculosGuardados()
 
 controladorV.contenedorVehiculos()
 controladorV.mostrarVehiculos()
+
+
 
 controladorVG.recuperarStorageVG()
 controladorVG.mostrarVehiculosG()
