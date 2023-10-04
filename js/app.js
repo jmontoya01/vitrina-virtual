@@ -196,6 +196,7 @@ class controladorVehículos {
             })
         })
         controladorV.mostrarInfo()
+        controladorV.botonWpp()
     }
 
     mostrarInfo() {
@@ -207,6 +208,15 @@ class controladorVehículos {
                 infoModal.innerHTML = vehiculos.cardInfo()
                 })
                 
+            })
+        }
+
+        botonWpp(){
+            const btnWpp = document.getElementById("btnWpp")
+            const numeroWpp = 573015980389
+            const urlWpp = `https://api.whatsapp.com/send?phone=${numeroWpp}&text=¿Hola,%20me%20puede%20regalar%20más%20información?`
+            btnWpp.addEventListener("click", () => {
+                window.location.href = urlWpp
             })
         }
     }
