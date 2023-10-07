@@ -59,7 +59,6 @@ class vehiculos {
         return `
         <article class="tarjeta">
             <div class="tarjeta__cuerpo">
-                <a href="">
                 <div id="${this.idCarouser}" class="carousel slide carousel-fade">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -89,7 +88,6 @@ class vehiculos {
                     <span class="visually-hidden">Next</span>
                 </button>
                 </div>
-                </a>
                 <h2 class="precio">Precio $ ${this.precio}</h2>
                 <hr>
                 <p class="nombre">${this.nombre}</p>
